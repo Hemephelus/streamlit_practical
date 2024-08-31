@@ -2,10 +2,13 @@ from flask import Flask, render_template, request, jsonify
 from werkzeug.utils import secure_filename
 import os
 import time
+from dotenv import load_dotenv
 
 from openai import OpenAI
 
-client = OpenAI()
+load_dotenv()  # Load environment variables from .env
+api_key = os.getenv("OPENAI_API_KEY")
+client = OpenAI(api_key=api_key)
 
 app = Flask(__name__)
 ALLOWED_EXTENSIONS = {"txt", "pdf", "png", "jpg", "jpeg", "gif", "csv"}
